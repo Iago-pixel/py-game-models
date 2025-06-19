@@ -27,9 +27,17 @@ def main() -> None:
 
         for skill_dict in skills_dict:
             try:
-                skill_obj = Skill.objects.get(**skill_dict, race=race_obj)
+                skill_obj = Skill.objects.get(
+                    name=skill_dict["name"],
+                    bonus=skill_dict["bonus"],
+                    race=race_obj
+                )
             except Skill.DoesNotExist:
-                skill_obj = Skill(**skill_dict, race=race_obj)
+                skill_obj = Skill(
+                    name=skill_dict["name"],
+                    bonus=skill_dict["bonus"],
+                    race=race_obj
+                )
                 skill_obj.save()
 
         guild_dict = player_dict["guild"]
